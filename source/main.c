@@ -2,6 +2,7 @@
 #include <string.h>
 #include <malloc.h>
 #include <inttypes.h>
+#include <stdint.h>
 #include <stdio.h>
 #include "archives.h"
 #include "sha1.h"
@@ -55,8 +56,15 @@ int main() {
 		if (next == 0) break;
 	}
 
+	consoleClear();
+	puts("Rebooting");
+	aptOpenSession();
+	APT_HardwareResetAsync();
+	aptCloseSession();
+
 	gfxExit();
-	return 0;
+	while (1)
+		svcSleepThread(UINT64_MAX);
 }
 
 /*void KernelTimeMachine(Handle amHandle) {

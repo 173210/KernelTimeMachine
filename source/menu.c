@@ -381,12 +381,8 @@ u8 downgradeMenu() {
 
 		hidScanInput();
 		kDown = hidKeysDown();
-		if (kDown & KEY_START) {
-			aptOpenSession();
-			APT_HardwareResetAsync();
-			aptCloseSession();
-			return 0;
-		}
+		if (kDown & KEY_START)
+			break;
 	}
 
 	return 0;
@@ -404,7 +400,7 @@ u8 mainMenu() {
 	printf("(Y) Downgrade Firmware\n");
 	printf("(L+Y) Downgrade MSET [WIP]\n");
 	printf("(R+Y) Downgrade Browser [WIP]\n");
-	printf("(START) Exit");
+	printf("(START) Reboot");
 	//gfxFlushBuffers();
 	//gfxSwapBuffers();
 	while (aptMainLoop()) {
